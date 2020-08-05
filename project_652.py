@@ -1,6 +1,3 @@
-### BIA 652 final project ###
-### Group 10 ###
-
 import pandas as pd
 import numpy as np
 import copy
@@ -22,7 +19,7 @@ from sklearn import preprocessing
 ##########  Data clean ##########
 
 # import data
-data = pd.read_csv('/Users/haodong/Desktop/652 project/dataset.csv')
+data = pd.read_csv('dataset.csv')
 
 # drop useless column
 dat = data.iloc[:, 1:]
@@ -77,11 +74,11 @@ for i in range(0, len(dat1)):
     dat1['currency'][i] = 'USD'
 
 dat1 = pd.DataFrame.dropna(dat1, axis=0, how='any')
-pd.DataFrame(dat1).to_excel('/Users/haodong/Desktop/652 project/BIA652 Data.xlsx')
+pd.DataFrame(dat1).to_excel('Data.xlsx')
 
 
 ########## Re-format time ##########
-dat1 = pd.read_csv('/Users/haodong/Desktop/652 project/BIA652 Data.csv')
+dat1 = pd.read_csv('Data.csv')
 dat1 = dat1.iloc[:, 1:]
 
 for i in range(0, len(dat1)):
@@ -90,10 +87,10 @@ for i in range(0, len(dat1)):
     dat1['launched_at'][i] = time.strftime("%Y-%m-%d", time.localtime(dat1.iloc[i]['launched_at']))
 
 # output new dataset with uniform currency and time format
-pd.DataFrame(dat1).to_excel('/Users/haodong/Desktop/652 project/BIA652 Dataset.xlsx')
+pd.DataFrame(dat1).to_excel('Dataset.xlsx')
 
 ########## Re category ##########
-data = pd.read_excel("/Users/haodong/Desktop/652 project/BIA652 Dataset.xlsx", header=0)
+data = pd.read_excel("Dataset.xlsx", header=0)
 
 lo = data['loc_country'].unique()
 cat = data['cate_name'].unique()
@@ -157,9 +154,9 @@ classMap_cat = {'Broadcast':0, 'Software':1, 'Art':2, 'Human Action':3, 'Hardwar
 data['category'] = data['category'].map(classMap_cat)
 
 # output data for classification
-pd.DataFrame(data).to_excel('/Users/haodong/Desktop/652 project/data_update_dummy.xlsx')
+pd.DataFrame(data).to_excel('data_update_dummy.xlsx')
 
-data = pd.read_excel('/Users/haodong/Desktop/652 project/data_update_dummy.xlsx', header=0)
+data = pd.read_excel('data_update_dummy.xlsx', header=0)
 
 y = data.iloc[:, -5]
 X = data.iloc[:, [3, 9, 14, 15, 16, 17]]
@@ -197,7 +194,7 @@ dat = pd.DataFrame(dat)
 dat['status'] = list(y)
 print(dat)
 
-pd.DataFrame(dat).to_csv('/Users/haodong/Desktop/652 project/652dat.csv', index=False)
+pd.DataFrame(dat).to_csv('dat.csv', index=False)
 
 ########## Modeling ##########
 # Classification
@@ -305,7 +302,7 @@ plt.show()
 
 
 # Classification by using PCA data
-dat = pd.read_csv('/Users/haodong/Desktop/652 project/652dat.csv')
+dat = pd.read_csv('dat.csv')
 X = dat.iloc[:, :-1]
 y = dat.iloc[:, -1]
 
