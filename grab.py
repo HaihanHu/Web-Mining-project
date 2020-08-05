@@ -1,8 +1,3 @@
-'''
-Team 4
-2018-10-26
-'''
-
 import re
 import requests
 import _thread 
@@ -32,54 +27,6 @@ if __name__ == '__main__':
     _thread.start_new_thread(grab2.getProjectContent(range(1000, 2000)))
     _thread.start_new_thread(grab3.getProjectContent(range(2000, 2400)))
     
-    
-#    data = pd.read_csv('features.csv')
-#    urls = data.url
-#    
-#    url = urls[1336]
-#    print(url)
-#            
-#    response=requests.get(url,headers = { 'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36', })
-#    html=response.content
-#    
-#    soup = BeautifulSoup(html.decode('ascii', 'ignore'),'html.parser')
-#    
-#    title = ""
-#    content = ""
-#    imageCount = 0
-#    countVideo = 0
-#    review = soup.find('div', {'class':re.compile('full-description')})
-#    if review:
-#        txts = review.findAll('p')
-#        for txt in txts:
-#            content += txt.text
-#            
-#        assets = review.findAll('div', {'class':"template asset"})
-#        imageCount = len(assets)
-#    
-#    top = soup.find('div', {'class':re.compile('aspect-ratio')})
-#    if top:
-#        video = top.find('video')
-#        countVideo = 1 if video else 0
-#    
-#    titleNode = soup.find('meta', {'property':"og:title"})
-#    if titleNode:
-#        if 'content' in titleNode.attrs:
-#            title = titleNode['content']
-#    print(title['content'])
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
