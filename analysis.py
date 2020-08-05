@@ -1,9 +1,3 @@
-'''
-Team 4
-2018-11-14
-1542178800
-'''
-
 import pandas as pd
 import numpy as np
 import nltk
@@ -99,7 +93,7 @@ def tokenization_and_stemming(contents):
 
 if __name__ == '__main__':
     
-    data = pd.read_csv('/Users/shirleyhu/Desktop/637dataset.csv').reset_index(drop=True)
+    data = pd.read_csv('dataset.csv').reset_index(drop=True)
 #   data.dropna(how='any', inplace=True, subset=['loc_country'])
     
 #    print(data.isnull().sum())
@@ -122,75 +116,75 @@ if __name__ == '__main__':
     le.fit(X.cate_name)
     X.loc[:,'cate_name'] = le.transform(X['cate_name'])
     
-#    cates = X['cate_slug']
-#    X.loc[:,'category'] = [item.split('/')[0] for item in cates]
-#    X.drop('cate_slug', axis=1, inplace=True)
+    cates = X['cate_slug']
+    X.loc[:,'category'] = [item.split('/')[0] for item in cates]
+    X.drop('cate_slug', axis=1, inplace=True)
     
-#    le.fit(X.cate_name)
-#    X.loc[:,'category'] = le.transform(X['cate_name'])
+    le.fit(X.cate_name)
+    X.loc[:,'category'] = le.transform(X['cate_name'])
     
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=2)
     
-#    train_contents = X_train.content
-#    test_contents = X_test.content
+    train_contents = X_train.content
+    test_contents = X_test.content
     
-#    X_train.drop(['content', 'blurb', 'pledged'], axis=1, inplace=True)
-#    X_test.drop(['content', 'blurb', 'pledged'], axis=1, inplace=True)
+    X_train.drop(['content', 'blurb', 'pledged'], axis=1, inplace=True)
+    X_test.drop(['content', 'blurb', 'pledged'], axis=1, inplace=True)
     
-#    train_contents = tokenization_and_stemming(train_contents)
-#    test_contents = tokenization_and_stemming(test_contents)
+    train_contents = tokenization_and_stemming(train_contents)
+    test_contents = tokenization_and_stemming(test_contents)
 
-#    vectorizer = TfidfVectorizer(max_df=0.8,
-#                             min_df=0.2, stop_words='english',
-#                             use_idf=True, ngram_range=(1,1))
-#    vectorizer.fit(train_contents)
-#    counts_train = vectorizer.transform(train_contents)
-#    counts_test = vectorizer.transform(test_contents)
+    vectorizer = TfidfVectorizer(max_df=0.8,
+                             min_df=0.2, stop_words='english',
+                             use_idf=True, ngram_range=(1,1))
+    vectorizer.fit(train_contents)
+    counts_train = vectorizer.transform(train_contents)
+    counts_test = vectorizer.transform(test_contents)
     
-#    counter = CountVectorizer()
-#    counter.fit(train_contents)
-#    counts_train = counter.transform(train_contents)
-#    counts_test = counter.transform(test_contents)
+    counter = CountVectorizer()
+    counter.fit(train_contents)
+    counts_train = counter.transform(train_contents)
+    counts_test = counter.transform(test_contents)
     
     X_train = sp.csr_matrix(X_train)
     X_test = sp.csr_matrix(X_test)
     
-#    X_train = sp.hstack((counts_train, X_train), format='csr')
-#    X_test = sp.hstack((counts_test, X_test), format='csr')
+    X_train = sp.hstack((counts_train, X_train), format='csr')
+    X_test = sp.hstack((counts_test, X_test), format='csr')
     
-#    clf1 = MultinomialNB(alpha=0.1)
-#    clf1.fit(X_train,y_train)
-#    pred = clf1.predict(X_test)
-#    print (accuracy_score(pred,y_test))
-#    showCON('DTC', clf1, X_test, y_test)
+    clf1 = MultinomialNB(alpha=0.1)
+    clf1.fit(X_train,y_train)
+    pred = clf1.predict(X_test)
+    print (accuracy_score(pred,y_test))
+    showCON('DTC', clf1, X_test, y_test)
     
-#    clf2 = LogisticRegression(random_state=0, solver='lbfgs',multi_class='multinomial').fit(X_train,y_train)
-#    pred = clf2.predict(X_test)
-#    print (accuracy_score(pred,y_test))
-#    showCON('DTC', clf2, X_test, y_test)
-#    
-#    clf3 = LinearDiscriminantAnalysis()
-#    X_train = np.asarray(X_train)
-#    X_test = np.asarray(X_test)
-#    y_train = np.asarray(y_train)
-#    y_test = np.asarray(y_test)
-#    clf3.fit(X_train,y_train)
-#    clf3_score = clf3.score(X_test, y_test)
-#    print (clf3_score)
-#    showCON('DTC', clf3, X_test, y_test)
+    clf2 = LogisticRegression(random_state=0, solver='lbfgs',multi_class='multinomial').fit(X_train,y_train)
+    pred = clf2.predict(X_test)
+    print (accuracy_score(pred,y_test))
+    showCON('DTC', clf2, X_test, y_test)
+    
+    clf3 = LinearDiscriminantAnalysis()
+    X_train = np.asarray(X_train)
+    X_test = np.asarray(X_test)
+    y_train = np.asarray(y_train)
+    y_test = np.asarray(y_test)
+    clf3.fit(X_train,y_train)
+    clf3_score = clf3.score(X_test, y_test)
+    print (clf3_score)
+    showCON('DTC', clf3, X_test, y_test)
       
-#    clf4 = KNeighborsClassifier(n_neighbors=4)
-#    clf4.fit(X_train,y_train)
-#    clf4_score = clf4.score(X_test, y_test)
-#    print (clf4_score)
-#    showCON('KNN(K=4)', clf4, X_test, y_test)
+    clf4 = KNeighborsClassifier(n_neighbors=4)
+    clf4.fit(X_train,y_train)
+    clf4_score = clf4.score(X_test, y_test)
+    print (clf4_score)
+    showCON('KNN(K=4)', clf4, X_test, y_test)
 
 
-#    clf5 = tree.DecisionTreeClassifier()
-#    clf5 = clf5.fit(X_train,y_train)
-#    pred = clf5.predict(X_test)
-#    print (accuracy_score(pred,y_test))
-#    showCON('DTC', clf5, X_test, y_test)
+    clf5 = tree.DecisionTreeClassifier()
+    clf5 = clf5.fit(X_train,y_train)
+    pred = clf5.predict(X_test)
+    print (accuracy_score(pred,y_test))
+    showCON('DTC', clf5, X_test, y_test)
    
 
     clf6 = KMeans(n_clusters=4)
@@ -198,45 +192,6 @@ if __name__ == '__main__':
     pred = clf6.predict(X_test)
     print (accuracy_score(pred,y_test))
     showCON('KMeans', clf6, X_test, y_test)
-
-   
-#    dot_data = tree.export_graphviz(clf5, out_file=None, 
-#                     # feature_names=X,  
-#                      #class_names=y,  
-#                      filled=True, rounded=True,  
-#                      special_characters=True)  
-#    graph = graphviz.Source(dot_data)  
-#    graph 
-
-
-
-
-#dot_data = StringIO()
-#export_graphviz(clf5, out_file=dot_data,  
-#                filled=True, rounded=True,
-#                special_characters=True,feature_names = features,class_names=['0','1'])
-#graph = pydotplus.graph_from_dot_data(dot_data.getvalue())  
-#graph.write_png('decisiontree.png')
-#Image(graph.create_png())
-#graph
-
-#import Chefboost as chef
-#import pandas as pd
-#
-#config = {
-#	'algorithm': 'ID3' #ID3, C4.5, CART, Regression
-#	, 'enableGBM': False, 'epochs': 10, 'learning_rate': 1
-#	, 'enableRandomForest': False, 'num_of_trees': 5, 'enableMultitasking': False
-#	, 'enableAdaboost': False
-#	, 'debug': False
-#}
-#
-#
-#
-#chef.fit(X, config)
-
-
-
 
 
 
