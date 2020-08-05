@@ -1,7 +1,3 @@
-'''
-Team 4
-2018-11-18
-'''
 import re
 import json
 import requests
