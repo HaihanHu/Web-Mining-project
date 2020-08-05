@@ -1,8 +1,3 @@
-'''
-Team 4
-2018-10-26
-'''
-
 from bs4 import BeautifulSoup
 import requests
 import json
